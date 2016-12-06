@@ -257,7 +257,7 @@
                     ]
                   ]
                 },
-                "mode": "000644",
+                "mode": "777777",
                 "owner": "ec2-user",
                 "group": "ec2-user"
               }
