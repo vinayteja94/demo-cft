@@ -257,9 +257,9 @@
                     ]
                   ]
                 },
-                "mode": "777777",
+                "mode": "000777",
                 "owner": "ec2-user",
-                "group": "ec2-user"
+                "group": "root"
               }
             },
             "services": {
