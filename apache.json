@@ -29,7 +29,7 @@
         "c3.2xlarge",
         "c3.4xlarge",
         "c3.8xlarge"
-       
+
       ],
       "ConstraintDescription": "must be a valid EC2 instance type."
     },
@@ -116,12 +116,12 @@
       "c3.8xlarge": {
         "Arch": "HVM64"
       }
-      
+
     },
     "AWSRegionArch2AMI": {
       "us-east-1": {
         "PV64": "ami-1ccae774",
-	"HVM64": "ami-1ecae776",
+        "HVM64": "ami-1ecae776",
         "HVMG2": "ami-8c6b40e4"
       },
       "us-west-2": {
@@ -131,10 +131,10 @@
       },
       "us-west-1": {
         "PV64": "ami-d514f291",
-	"HVM64": "ami-d114f295",
+        "HVM64": "ami-d114f295",
         "HVMG2": "ami-f31ffeb7"
       }
-      
+
     }
   },
   "Resources": {
@@ -145,7 +145,7 @@
         "EnableDnsHostnames": "true",
         "CidrBlock": "10.0.0.0/16"
       }
-    
+
     },
     "PublicSubnet": {
       "Type": "AWS::EC2::Subnet",
@@ -155,11 +155,11 @@
           "Ref": "VPC"
         }
       }
-      
+
     },
     "InternetGateway": {
       "Type": "AWS::EC2::InternetGateway"
-      
+
     },
     "VPCGatewayAttachment": {
       "Type": "AWS::EC2::VPCGatewayAttachment",
@@ -171,7 +171,7 @@
           "Ref": "InternetGateway"
         }
       }
-     
+
     },
     "PublicRouteTable": {
       "Type": "AWS::EC2::RouteTable",
@@ -180,7 +180,7 @@
           "Ref": "VPC"
         }
       }
-     
+
     },
     "PublicRoute": {
       "Type": "AWS::EC2::Route",
@@ -194,7 +194,7 @@
           "Ref": "InternetGateway"
         }
       }
-      
+
     },
     "PublicSubnetRouteTableAssociation": {
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
@@ -206,7 +206,7 @@
           "Ref": "PublicRouteTable"
         }
       }
-      
+
     },
     "WebServerSecurityGroup": {
       "Type": "AWS::EC2::SecurityGroup",
@@ -226,11 +226,13 @@
             "IpProtocol": "tcp",
             "FromPort": "22",
             "ToPort": "22",
-            "CidrIp": "0.0.0.0/0"
+            "CidrIp": {
+              "Ref": "SSHLocation"
+            }
           }
         ]
       }
-     
+
     },
     "WebServerInstance": {
       "Type": "AWS::EC2::Instance",
@@ -257,8 +259,8 @@
                     ]
                   ]
                 },
-                "mode": "000777",
-                "owner": "ec2-user",
+                "mode": "000644",
+                "owner": "root",
                 "group": "root"
               }
             },
@@ -272,7 +274,7 @@
             }
           }
         }
-        
+
       },
       "Properties": {
         "InstanceType": {
@@ -295,7 +297,9 @@
             }
           ]
         },
-        "KeyName": 'ukohio',
+        "KeyName": {
+          "Ref": "ukohio"
+        },
         "NetworkInterfaces": [
           {
             "GroupSet": [
@@ -374,5 +378,5 @@
       "Description": "Newly created application URL"
     }
   }
-  
+
 }
