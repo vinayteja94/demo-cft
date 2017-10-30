@@ -295,9 +295,7 @@
             }
           ]
         },
-        "KeyName": {
-          "Ref": "KeyName"
-        },
+        "KeyName": 'ukohio',
         "NetworkInterfaces": [
           {
             "GroupSet": [
