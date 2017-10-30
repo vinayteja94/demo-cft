@@ -33,7 +33,7 @@
       ],
       "ConstraintDescription": "must be a valid EC2 instance type."
     },
-    "KeyName": {
+    "ukohio": {
       "Description": "Name of an existing EC2 KeyPair to enable SSH access to the instance.",
       "Type": "AWS::EC2::KeyPair::KeyName",
       "ConstraintDescription": "must be the name of an existing EC2 KeyPair."
@@ -297,7 +297,9 @@
             }
           ]
         },
-        "KeyName": "ukohio",
+        "KeyName": {
+          "Ref": "ukohio"
+        },
         "NetworkInterfaces": [
           {
             "GroupSet": [
